@@ -1,0 +1,12 @@
+services:
+  pg:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: brev_ly
+    ports:
+      - "5432:5432"
+    volumes:
+      - ".:/docker-entrypoint-initdb.d"
+    container_name: postgres
