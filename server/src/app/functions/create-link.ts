@@ -14,12 +14,16 @@ export async function createLink({ url }: { url: string }) {
     throw new LinkAlreadyExists()
   }
 
-  await db.insert(links).values({
-    url,
-    shortURL,
-  })
+  const result = await db
+    .insert(links)
+    .values({
+      url,
+      shortURL,
+    })
+    .returning({ id: links.id })
 
   return {
+    id: result[0].id,
     shortURL: shortURL,
     originalURL: url,
   }

@@ -9,9 +9,9 @@ export const createLinkRoute: FastifyPluginAsyncZod = async server => {
     async (request, reply) => {
       const { url } = request.body
 
-      const { originalURL, shortURL } = await createLink({ url })
+      const { originalURL, shortURL, id } = await createLink({ url })
 
-      return reply.status(201).send({ originalURL, shortURL })
+      return reply.status(201).send({ id, originalURL, shortURL })
     }
   )
 }

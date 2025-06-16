@@ -7,7 +7,11 @@ export const createLinkSchema = {
     url: z.string().url("URL inválida!"),
   }),
   response: {
-    201: z.object({ shortURL: z.string(), originalURL: z.string() }),
+    201: z.object({
+      id: z.string(),
+      shortURL: z.string(),
+      originalURL: z.string(),
+    }),
     400: z.object({
       message: z.string(),
     }),
