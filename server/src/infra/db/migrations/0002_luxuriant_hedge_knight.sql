@@ -1,0 +1,1 @@
+ALTER TABLE "links" ALTER COLUMN "csv_remote_url" SET DEFAULT '';

@@ -18,15 +18,14 @@ server.setSerializerCompiler(serializerCompiler)
 server.setErrorHandler((error, _, reply) => {
   if (hasZodFastifySchemaValidationErrors(error)) {
     return reply.status(400).send({
-      message: "Validation error",
-      issues: error.cause,
+      message: error.validation[0].message,
     })
   }
 
   console.error(error)
 
   return reply.status(500).send({
-    message: "Internal server error",
+    message: "Erro interno do servidor!",
   })
 })
 

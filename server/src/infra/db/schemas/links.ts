@@ -5,9 +5,9 @@ export const links = pgTable("links", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => uuidv7()),
-  url: text("name").notNull(),
-  shortUrl: text("remote_key").notNull().unique(),
+  url: text("url").notNull(),
+  shortURL: text("short_url").notNull().unique(),
   visits: integer("visits").notNull().default(0),
-  csvRemoteUrl: text("remote_url").notNull(),
+  csvRemoteURL: text("csv_remote_url").default(""),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 })

@@ -8,6 +8,20 @@
       "when": 1750031748116,
       "tag": "0000_massive_the_fallen",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1750035233761,
+      "tag": "0001_big_ricochet",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1750036273454,
+      "tag": "0002_luxuriant_hedge_knight",
+      "breakpoints": true
     }
   ]
 }

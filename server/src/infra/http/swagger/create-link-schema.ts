@@ -4,10 +4,10 @@ export const createLinkSchema = {
   summary: "Create a new link",
   tags: ["links"],
   body: z.object({
-    url: z.string().url().min(1, "URL is required"),
+    url: z.string().url("URL inválida!"),
   }),
   response: {
-    201: z.object({ shortUrl: z.string(), originalUrl: z.string() }),
+    201: z.object({ shortURL: z.string(), originalURL: z.string() }),
     400: z.object({
       message: z.string(),
     }),

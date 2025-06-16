@@ -1,3 +1,4 @@
+import { createLink } from "@/app/functions/create-link"
 import type { FastifyPluginAsyncZod } from "fastify-type-provider-zod"
 import { createLinkSchema } from "../swagger/create-link-schema"
 
@@ -8,10 +9,9 @@ export const createLinkRoute: FastifyPluginAsyncZod = async server => {
     async (request, reply) => {
       const { url } = request.body
 
-      return reply.status(201).send({
-        shortUrl: "short-url-12345",
-        originalUrl: url,
-      })
+      const { originalURL, shortURL } = await createLink({ url })
+
+      return reply.status(201).send({ originalURL, shortURL })
     }
   )
 }
