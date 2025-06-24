@@ -13,5 +13,5 @@
     - [ ]  Deve ser possível realizar a listagem de forma performática
     - [ ]  O CSV deve ter campos como, URL original, URL encurtada, contagem de acessos e data de criação.
 - [ ] Criar testes unitarios das funções.
-- [ ] Criar dockerfile para fazer build da imagem.
+- [x] Criar dockerfile para fazer build da imagem.
 - [ ] Atualizar o readme.

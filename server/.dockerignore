@@ -1,0 +1,10 @@
+.env
+biome.json
+.env.test
+node_modules
+.gitignore
+.nvmrc
+.npmrc
+Readme.md
+scripts
+docker
