@@ -9,6 +9,7 @@ export const getAllLinkSchema = {
         id: z.string(),
         shortURL: z.string(),
         originalURL: z.string(),
+        visits: z.number(),
       })
     ),
     400: z.object({

@@ -7,6 +7,7 @@ export async function getAllLinks() {
       id: links.id,
       originalURL: links.url,
       shortURL: links.shortURL,
+      visits: links.visits,
     })
     .from(links)
 
