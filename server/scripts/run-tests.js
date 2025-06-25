@@ -1,4 +1,4 @@
-const { spawn } = require("node:child_process");
+const { spawn } = require("node:child_process")
 
 const commandsToRunTests = [
   "yarn services:up",
@@ -6,21 +6,21 @@ const commandsToRunTests = [
   "node scripts/reset-db.js",
   "yarn db:migrate:test",
   "dotenv -e .env.test -- vitest run",
-].join(" && ");
+].join(" && ")
 
-spawn(commandsToRunTests, { stdio: "inherit", shell: true });
+spawn(commandsToRunTests, { stdio: "inherit", shell: true })
 
 function servicesStop() {
-  console.warn("Encerrando...");
+  console.warn("Encerrando...")
 
   spawn("yarn services:stop", {
     detached: true,
     shell: true,
     windowsHide: true,
     stdio: "ignore",
-  });
+  })
 }
 
-process.on("SIGINT", servicesStop);
-process.on("SIGTERM", servicesStop);
-process.on("exit", servicesStop);
+process.on("SIGINT", servicesStop)
+process.on("SIGTERM", servicesStop)
+process.on("exit", servicesStop)

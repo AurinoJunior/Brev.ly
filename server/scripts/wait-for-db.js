@@ -11,7 +11,7 @@ function handleReturn(_error, stdout) {
 }
 
 function checkPostgres() {
-  exec("docker exec postgres pg_isready --host localhost", handleReturn)
+  exec("docker exec postgres_brev_ly pg_isready --host localhost", handleReturn)
 }
 
 process.stdout.write("\n\n🔴 Aguardando Postgres aceitar conexões")
