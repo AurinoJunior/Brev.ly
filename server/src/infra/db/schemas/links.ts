@@ -8,6 +8,5 @@ export const links = pgTable("links", {
   url: text("url").notNull(),
   shortURL: text("short_url").unique().notNull(),
   visits: integer("visits").default(0).notNull(),
-  csvRemoteURL: text("csv_remote_url").default(""),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 })

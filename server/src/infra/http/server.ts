@@ -10,6 +10,7 @@ import {
 } from "fastify-type-provider-zod"
 import { createLinkRoute } from "./routes/create-link"
 import { deleteLinkRoute } from "./routes/delete-link"
+import { exportLinksRoute } from "./routes/export-links"
 import { getAllLinkRoute } from "./routes/get-all-links"
 import { getOriginalLinkRoute } from "./routes/get-original-link"
 import { incrementAccessRoute } from "./routes/increment-access"
@@ -55,6 +56,7 @@ server.register(deleteLinkRoute)
 server.register(getOriginalLinkRoute)
 server.register(getAllLinkRoute)
 server.register(incrementAccessRoute)
+server.register(exportLinksRoute)
 
 server.listen({ port: 3333, host: "0.0.0.0" }).then(() => {
   console.info("HTTP server running!")

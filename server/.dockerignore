@@ -1,4 +1,5 @@
 .env
+.env.*
 biome.json
 .env.test
 node_modules
