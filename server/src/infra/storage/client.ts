@@ -1,11 +1,15 @@
 import { env } from "@/env"
-import { S3Client } from "@aws-sdk/client-s3"
+import * as Minio from "minio"
 
-export const r2 = new S3Client({
-  region: "auto",
-  endpoint: `https://${env.CLOUFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-  credentials: {
-    accessKeyId: env.CLOUDFLARE_ACCESS_KEY_ID,
-    secretAccessKey: env.CLOUDFLARE_SECRET_ACCESS_KEY,
-  },
-})
+const minioConfig: Minio.ClientOptions = {
+  endPoint: env.CLOUDFLARE_ENDPOINT,
+  accessKey: env.CLOUDFLARE_ACCESS_KEY_ID,
+  secretKey: env.CLOUDFLARE_SECRET_ACCESS_KEY,
+}
+
+// if (env.NODE_ENV === "development") {
+//   minioConfig.port = 9000
+//   minioConfig.useSSL = false
+// }
+
+export const r2 = new Minio.Client(minioConfig)

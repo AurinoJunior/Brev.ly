@@ -1,6 +1,5 @@
 import type { Readable } from "node:stream"
 import { env } from "@/env"
-import { Upload } from "@aws-sdk/lib-storage"
 import { r2 } from "./client"
 
 interface UploadCSVToStorageParams {
@@ -12,19 +11,21 @@ export async function uploadCSVToStorage({
 }: UploadCSVToStorageParams) {
   const uniqueFileName = `${new Date().toISOString()}-links.csv`
 
-  const upload = new Upload({
-    client: r2,
-    params: {
-      Key: uniqueFileName,
-      Bucket: env.CLOUDFLARE_BUCKET,
-      Body: contentStream,
-      ContentType: "text/csv",
-    },
-  })
+  await r2.putObject(
+    env.CLOUDFLARE_BUCKET,
+    uniqueFileName,
+    contentStream,
+    undefined,
+    { "Content-Type": "text/csv" }
+  )
 
-  await upload.done()
-
+  const isLocalEnv = env.NODE_ENV !== "production"
   return {
-    url: new URL(uniqueFileName, env.CLOUDFLARE_PUBLIC_URL).toString(),
+    url: new URL(
+      isLocalEnv
+        ? `${env.CLOUDFLARE_BUCKET}/${uniqueFileName}`
+        : uniqueFileName,
+      env.CLOUDFLARE_PUBLIC_URL
+    ).toString(),
   }
 }
