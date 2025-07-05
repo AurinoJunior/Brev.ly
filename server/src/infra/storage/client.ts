@@ -7,9 +7,9 @@ const minioConfig: Minio.ClientOptions = {
   secretKey: env.CLOUDFLARE_SECRET_ACCESS_KEY,
 }
 
-// if (env.NODE_ENV === "development") {
-//   minioConfig.port = 9000
-//   minioConfig.useSSL = false
-// }
+if (env.NODE_ENV === "development") {
+  minioConfig.port = 9000
+  minioConfig.useSSL = false
+}
 
 export const r2 = new Minio.Client(minioConfig)
