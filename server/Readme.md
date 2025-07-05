@@ -38,6 +38,16 @@ Brev.ly é uma aplicação para encurtamento de URLs que permite cadastrar, list
 4. Lembrando que é utilizado um container docker local para subir o banco de dados, então garanta que o docker esteja instalado corretamente e esteja disponivel para uso.
 5. Utilize o comando `yarn start` se tudo ocorrer bem a aplicação estará acessivel em https://localhost:3333/docs
 
+**Para usar a função de exportar um csv é necessario criar um bucket.**
+
+6. Após subir a aplicação acesse https://localhost:9001 para acessar o painel do minio
+7. Utilize o login e senha `minioadmin`
+8. Crie um bucket chamado brev-ly
+9. Crie uma nova access_key e secret_key para utilizar na `.env`
+10. Tambem é necessario trocar a policie do bucket em `Access Policy` para `Public`.
+
+> Não se esqueça de reiniciar a aplicação para recarregar as envs
+
 ## :beers: Como usar
 
 O projeto tem um swagger configurado com as principais rotas da aplicação até o momento nenhum tipo de autenticação foi implementado, então só acessar https://localhost:3333/docs para utilizar.
