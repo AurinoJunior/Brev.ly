@@ -1,3 +1,3 @@
 export const App = () => {
-  return <h1>Brev.ly</h1>
+  return <h1 className="font-sans text-xl text-danger">Brev.ly</h1>
 }
