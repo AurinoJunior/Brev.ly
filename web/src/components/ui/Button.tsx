@@ -4,7 +4,7 @@ import { type VariantProps, tv } from "tailwind-variants"
 import { Icon, type TIconName } from "./Icon"
 
 const buttonVariants = tv({
-  base: "w-full h-[48px] font-semibold text-md text-white rounded-lg cursor-pointer disabled:opacity-50 disabled:pointer-events-none aria-disabled:opacity-50 aria-disabled:pointer-events-none",
+  base: "w-full h-[48px] font-semibold text-[14px] text-white rounded-lg cursor-pointer disabled:opacity-50 disabled:pointer-events-none aria-disabled:opacity-50 aria-disabled:pointer-events-none",
   variants: {
     variant: {
       primary: "bg-blue-base hover:bg-blue-dark",
