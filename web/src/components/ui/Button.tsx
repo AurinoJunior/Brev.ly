@@ -4,13 +4,13 @@ import { type VariantProps, tv } from "tailwind-variants"
 import { Icon, type TIconName } from "./Icon"
 
 const buttonVariants = tv({
-  base: "w-full h-[48px] font-semibold text-[14px] text-white rounded-lg cursor-pointer disabled:opacity-50 disabled:pointer-events-none aria-disabled:opacity-50 aria-disabled:pointer-events-none",
+  base: "flex items-center justify-center gap-2 p-2 bg-gray-200 h-[32px] rounded-sm text-[12px] text-gray-500 hover:border-1 hover:border-blue-base cursor-pointer disabled:opacity-50 disabled:pointer-events-none aria-disabled:opacity-50 aria-disabled:pointer-events-none",
   variants: {
     variant: {
-      primary: "bg-blue-base hover:bg-blue-dark",
-      secondary:
-        "bg-gray-200 text-gray-500 hover:border-1 hover:border-blue-base",
-      icon: "flex items-center justify-center gap-2 p-2 bg-gray-200 w-fit h-[32px] rounded-sm text-[12px] text-gray-500 hover:border-1 hover:border-blue-base",
+      primary:
+        "w-full h-[48px] font-semibold text-[14px] text-white rounded-lg bg-blue-base hover:bg-blue-dark",
+      icon: "w-[32px]",
+      iconButton: "w-fit",
     },
   },
 })
