@@ -6,12 +6,12 @@ interface InfoCardProps {
 
 export const InfoCard = ({ img, title, children }: InfoCardProps) => {
   return (
-    <div className="bg-white rounded-lg w-full max-w-[580px]">
+    <div className="flex items-center flex-col gap-6 bg-white rounded-lg w-full max-w-[580px] px-5 py-12">
       <div>
         <img src={img} alt={title} />
       </div>
-      <h3 className="text-xl font-bold text-gray-600 mb-6">{title}</h3>
-      {children}
+      <h3 className="text-xl font-bold text-gray-600">{title}</h3>
+      <div className="text-center">{children}</div>
     </div>
   )
 }
