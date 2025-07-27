@@ -9,6 +9,7 @@ describe("get original link", () => {
 
     const newLink = await createLink({
       url: mockOriginalLink,
+      shortURL: "http://brev.ly/link",
     })
 
     const sut = await getOriginalLink({

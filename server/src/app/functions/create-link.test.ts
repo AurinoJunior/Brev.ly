@@ -4,20 +4,20 @@ import { createLink } from "./create-link"
 
 describe("create link", () => {
   it("should be able create a new link", async () => {
-    const mockURL = "http://www.site-muito-legal.com.br/rocketseat"
-
     const sut = await createLink({
-      url: mockURL,
+      url: "http://www.site-muito-legal.com.br/rocketseat",
+      shortURL: "http://brev.ly/rocket",
     })
 
-    expect(sut).toHaveProperty("shortURL")
+    expect(sut).toHaveProperty("id")
   })
 
   it("should not be able create a new link already exists", async () => {
-    const mockURL = "http://www.site-muito-legal.com.br/rocketseat"
-
-    await expect(createLink({ url: mockURL })).rejects.toThrow(
-      LinkAlreadyExists
-    )
+    await expect(
+      createLink({
+        url: "http://www.site-muito-legal.com.br/rocketseat",
+        shortURL: "http://brev.ly/rocket",
+      })
+    ).rejects.toThrow(LinkAlreadyExists)
   })
 })

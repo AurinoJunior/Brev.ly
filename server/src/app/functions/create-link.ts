@@ -1,11 +1,11 @@
 import { db } from "@/infra/db"
 import { links } from "@/infra/db/schemas/links"
-import { generateShortUrl } from "@/utils/generateShortUrl"
 import { LinkAlreadyExists } from "../errors/link-already-exists"
 
-export async function createLink({ url }: { url: string }) {
-  const shortURL = generateShortUrl(url)
-
+export async function createLink({
+  url,
+  shortURL,
+}: { url: string; shortURL: string }) {
   const existingLink = await db.query.links.findFirst({
     where: (links, { eq }) => eq(links.url, url),
   })

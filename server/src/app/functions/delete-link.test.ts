@@ -8,10 +8,9 @@ import { deleteLink } from "./delete-link"
 
 describe("delete link", () => {
   it("should be able to delete a link", async () => {
-    const mockURL = "http://www.site-muito-legal.com.br/"
-
     const sut = await createLink({
-      url: mockURL,
+      url: "http://www.site-muito-legal.com.br/",
+      shortURL: "http://brev.ly/test",
     })
 
     await deleteLink({ id: sut.id })

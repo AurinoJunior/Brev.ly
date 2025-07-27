@@ -5,6 +5,7 @@ export const createLinkSchema = {
   tags: ["links"],
   body: z.object({
     url: z.string().url("URL inválida!"),
+    shortURL: z.string().url("URL inválida!"),
   }),
   response: {
     201: z.object({

@@ -7,11 +7,11 @@ export const createLinkRoute: FastifyPluginAsyncZod = async server => {
     "/links",
     { schema: createLinkSchema },
     async (request, reply) => {
-      const { url } = request.body
+      const { url, shortURL } = request.body
 
-      const { originalURL, shortURL, id } = await createLink({ url })
+      const { id } = await createLink({ url, shortURL })
 
-      return reply.status(201).send({ id, originalURL, shortURL })
+      return reply.status(201).send({ id, originalURL: url, shortURL })
     }
   )
 }

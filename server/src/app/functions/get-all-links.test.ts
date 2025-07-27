@@ -1,20 +1,23 @@
 import { db } from "@/infra/db"
 import { links } from "@/infra/db/schemas/links"
-import { describe, expect, it } from "vitest"
+import { beforeAll, describe, expect, it } from "vitest"
 import { createLink } from "./create-link"
 import { getAllLinks } from "./get-all-links"
 
 describe("get all links", () => {
-  it("should be get all links", async () => {
-    const testURL1 = "http://www.site-muito-legal.com.br/test-1"
-    const testURL2 = "http://www.site-muito-legal.com.br/test-2"
+  beforeAll(async () => {
+    await db.delete(links)
+  })
 
+  it("should be get all links", async () => {
     await createLink({
-      url: testURL1,
+      url: "http://www.site-muito-legal.com.br/test-1",
+      shortURL: "http://brev.ly/test-1",
     })
 
     await createLink({
-      url: testURL2,
+      url: "http://www.site-muito-legal.com.br/test-2",
+      shortURL: "http://brev.ly/test-2",
     })
 
     const sut = await getAllLinks()

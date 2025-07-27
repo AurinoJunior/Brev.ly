@@ -10,6 +10,7 @@ describe("increment access", () => {
 
     const newLink = await createLink({
       url: mockIncrementAccess,
+      shortURL: "http://brev.ly/access",
     })
 
     await incrementAccess({

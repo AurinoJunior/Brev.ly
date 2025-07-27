@@ -1,9 +1,15 @@
 import { exportLinks } from "@/app/functions/export-links"
 import { db } from "@/infra/db"
 import { links } from "@/infra/db/schemas/links"
-import * as upload from "@/infra/storage/upload-csv-to-storage"
+import { uploadCSVToStorage } from "@/infra/storage/upload-csv-to-storage"
 import { beforeAll, describe, expect, it, vi } from "vitest"
 import { createLink } from "./create-link"
+
+vi.mock("@/infra/storage/upload-csv-to-storage", () => ({
+  uploadCSVToStorage: vi
+    .fn()
+    .mockResolvedValue({ url: "http://example.com/file.csv" }),
+}))
 
 describe("export links", () => {
   beforeAll(async () => {
@@ -11,27 +17,24 @@ describe("export links", () => {
   })
 
   it("should be able to export links", async () => {
-    const uploadStub = vi
-      .spyOn(upload, "uploadCSVToStorage")
-      .mockImplementationOnce(async () => {
-        return {
-          url: "http://example.com/file.csv",
-        }
-      })
-
     const link1 = await createLink({
       url: "http://www.site-muito-legal.com.br/export-link/1",
+      shortURL: "http://brev.ly/test1",
     })
     const link2 = await createLink({
       url: "http://www.site-muito-legal.com.br/export-link/2",
+      shortURL: "http://brev.ly/test2",
     })
     const link3 = await createLink({
       url: "http://www.site-muito-legal.com.br/export-link/3",
+      shortURL: "http://brev.ly/test3",
     })
 
     const sut = await exportLinks()
 
-    const generatedCSVStream = uploadStub.mock.calls[0][0].contentStream
+    const calledArgs = vi.mocked(uploadCSVToStorage).mock.calls[0][0]
+    const generatedCSVStream = calledArgs.contentStream
+
     const csvAsString = await new Promise<string>((resolve, reject) => {
       const chunks: Buffer[] = []
 
