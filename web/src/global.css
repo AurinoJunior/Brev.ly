@@ -21,13 +21,3 @@
 
   --color-danger: #b12c4d;
 }
-
-@media (min-width: 1024px) {
-  :root {
-    --text-xl: 32px;
-    --text-lg: 24px;
-    --text-md: 18px;
-    --text-sm: 16px;
-    --text-xs: 14px;
-  }
-}
