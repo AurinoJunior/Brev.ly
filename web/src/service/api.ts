@@ -1,3 +1,5 @@
+import type { ErrorResponse } from "../@types/api"
+
 type RequestOptions<T = unknown> = {
   method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH"
   body?: T
@@ -37,7 +39,7 @@ export async function api<U, T = unknown>(
     })
 
     if (!response.ok) {
-      const errorData = await response.json()
+      const errorData: ErrorResponse = await response.json()
       throw new Error(
         errorData.message || "Ops, algo deu errado, tente novamente mais tarde!"
       )

@@ -4,9 +4,10 @@ import {
   Input as HeadlessInput,
   Label,
 } from "@headlessui/react"
+import type { InputHTMLAttributes } from "react"
 import { Icon } from "./Icon"
 
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string
   name: string
   placeholder?: string

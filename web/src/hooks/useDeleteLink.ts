@@ -1,5 +1,5 @@
+import { mutate } from "swr"
 import useSWRMutation from "swr/mutation"
-import type { ErrorResponse } from "../@types/api"
 import { api } from "../service/api"
 
 interface DeleteLinkPayload {
@@ -9,12 +9,16 @@ interface DeleteLinkPayload {
 export const useDeleteLink = () => {
   const { trigger, data, error, isMutating } = useSWRMutation(
     "delete-link",
-    (_, { arg }: { arg: DeleteLinkPayload }) =>
-      api<ErrorResponse | undefined, DeleteLinkPayload>("/links", {
+    async (_, { arg }: { arg: DeleteLinkPayload }) => {
+      const result = await api<DeleteLinkPayload>("/links", {
         method: "DELETE",
         body: arg,
       })
+
+      mutate("get-all-links")
+      return result
+    }
   )
 
-  return { createLink: trigger, data, error, isLoading: isMutating }
+  return { deleteLink: trigger, data, error, isLoading: isMutating }
 }

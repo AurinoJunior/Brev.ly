@@ -10,7 +10,7 @@ export const Home = () => {
       </div>
 
       <div className="flex flex-col gap-3 w-full lg:flex-row">
-        <div className="bg-white p-6 rounded-lg w-full max-w-[380px]">
+        <div className="bg-white p-6 rounded-lg w-full max-w-[380px] h-fit">
           <h2 className="text-lg font-bold mb-5">Novo link</h2>
           <NewLinkForm />
         </div>

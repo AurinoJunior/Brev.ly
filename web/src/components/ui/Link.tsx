@@ -4,11 +4,21 @@ interface LinkProps {
   shortLink: string
   originalLink: string
   accessCount: number
+  handleDeleteLink: () => void
 }
 
-export const Link = ({ shortLink, originalLink, accessCount }: LinkProps) => {
+export const Link = ({
+  shortLink,
+  originalLink,
+  accessCount,
+  handleDeleteLink,
+}: LinkProps) => {
+  const handleCopyShortLink = () => {
+    navigator.clipboard.writeText(shortLink)
+  }
+
   return (
-    <div className="flex items-center justify-between py-4 gap-4">
+    <div className="flex items-center justify-between py-4 gap-4 border-b border-gray-200 last:border-b-0">
       <div className="max-w-[157px]">
         <h3 className="text-md font-semibold text-blue-base truncate">
           {shortLink}
@@ -16,11 +26,10 @@ export const Link = ({ shortLink, originalLink, accessCount }: LinkProps) => {
         <p className="text-sm text-gray-500 truncate">{originalLink}</p>
       </div>
 
-      <p className="text-sm text-gray-500">{accessCount} acessos</p>
-
       <div className="flex items-center gap-1">
-        <Button variant="icon" icon="copy" />
-        <Button variant="icon" icon="trash" />
+        <p className="text-sm text-gray-500 mr-4">{accessCount} acessos</p>
+        <Button variant="icon" icon="copy" onClick={handleCopyShortLink} />
+        <Button variant="icon" icon="trash" onClick={handleDeleteLink} />
       </div>
     </div>
   )

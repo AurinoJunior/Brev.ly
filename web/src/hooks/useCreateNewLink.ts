@@ -1,3 +1,4 @@
+import { mutate } from "swr"
 import useSWRMutation from "swr/mutation"
 import type { ErrorResponse, NewLinkResponse } from "../@types/api"
 import { api } from "../service/api"
@@ -10,12 +11,21 @@ interface NewLinkPayload {
 export const useCreateNewLink = () => {
   const { trigger, data, error, isMutating } = useSWRMutation(
     "create-new-link",
-    (_, { arg }: { arg: NewLinkPayload }) =>
-      api<NewLinkResponse | ErrorResponse, NewLinkPayload>("/links", {
+    (_, { arg }: { arg: NewLinkPayload }) => {
+      const result = api<NewLinkResponse, NewLinkPayload>("/links", {
         method: "POST",
         body: arg,
       })
+
+      mutate("get-all-links")
+      return result
+    }
   )
 
-  return { createLink: trigger, data, error, isLoading: isMutating }
+  return {
+    createLink: trigger,
+    data,
+    error: error as ErrorResponse,
+    isLoading: isMutating,
+  }
 }

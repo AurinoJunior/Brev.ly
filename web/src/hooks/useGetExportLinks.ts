@@ -2,7 +2,7 @@ import useSWR from "swr"
 import type { ErrorResponse, ExportLinksResponse } from "../@types/api"
 import { api } from "../service/api"
 
-export const useGetAllLinks = () => {
+export const useGetExportLinks = () => {
   const { data, error, isLoading } = useSWR("export-links", () =>
     api<ExportLinksResponse[] | ErrorResponse>("/links/export")
   )

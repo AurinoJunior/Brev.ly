@@ -4,12 +4,12 @@ import { api } from "../service/api"
 
 export const useGetAllLinks = () => {
   const { data, error, isLoading } = useSWR("get-all-links", () =>
-    api<LinkResponse[] | ErrorResponse>("/links")
+    api<LinkResponse[]>("/links")
   )
 
   return {
     links: data,
-    error,
+    error: error as ErrorResponse | undefined,
     isLoading,
   }
 }
