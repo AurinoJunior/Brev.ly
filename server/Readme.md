@@ -36,11 +36,11 @@ Brev.ly é uma aplicação para encurtamento de URLs que permite cadastrar, list
 2. Instale as dependencias com `yarn` lembrando que para esse projeto é utilizado `node >= 22.0.0`.
 3. Clone o .env.example para .env
 4. Lembrando que é utilizado um container docker local para subir o banco de dados, então garanta que o docker esteja instalado corretamente e esteja disponivel para uso.
-5. Utilize o comando `yarn start` se tudo ocorrer bem a aplicação estará acessivel em https://localhost:3333/docs
+5. Utilize o comando `yarn start` se tudo ocorrer bem a aplicação estará acessivel em http://localhost:3333/docs
 
 **Para usar a função de exportar um csv é necessario criar um bucket.**
 
-6. Após subir a aplicação acesse https://localhost:9001 para acessar o painel do minio
+6. Após subir a aplicação acesse http://localhost:9001 para acessar o painel do minio
 7. Utilize o login e senha `minioadmin`
 8. Crie um bucket chamado brev-ly
 9. Crie uma nova access_key e secret_key para utilizar na `.env`

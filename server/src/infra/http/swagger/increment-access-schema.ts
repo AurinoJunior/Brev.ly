@@ -2,7 +2,7 @@ import { z } from "zod"
 
 export const incrementAccessSchema = {
   summary: "Create a new link",
-  tags: ["links"],
+  tags: ["increment-access"],
   body: z.object({
     id: z.string().min(1, { message: "O ID é obrigatório!" }),
   }),
