@@ -20,7 +20,7 @@ function buildUrl(
   return url.toString()
 }
 
-export async function api<T, U>(
+export async function api<U, T = unknown>(
   endpoint: string,
   options: RequestOptions<T> = {}
 ): Promise<U> {
