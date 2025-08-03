@@ -2,13 +2,15 @@ import useSWR from "swr"
 import type { ErrorResponse, LinkResponse } from "../@types/api"
 import { api } from "../service/api"
 
-export const useGetOriginalLink = () => {
-  const { data, error, isLoading } = useSWR("original-links", () =>
-    api<LinkResponse>("/original-links")
+export const useGetOriginalLink = ({ shortURL }: { shortURL: string }) => {
+  const { data, error, isLoading } = useSWR("original-link", () =>
+    api<LinkResponse>(`/original-link/${shortURL}`, {
+      queryParams: { shortURL },
+    })
   )
 
   return {
-    links: data,
+    data,
     error: error as ErrorResponse,
     isLoading,
   }

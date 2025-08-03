@@ -1,5 +1,5 @@
 import useSWRMutation from "swr/mutation"
-import type { ExportLinksResponse } from "../@types/api"
+import type { ErrorResponse, ExportLinksResponse } from "../@types/api"
 import { api } from "../service/api"
 
 export const useGetExportLinks = () => {
@@ -12,5 +12,10 @@ export const useGetExportLinks = () => {
       })
   )
 
-  return { exportLinks: trigger, data, error, isLoading: isMutating }
+  return {
+    exportLinks: trigger,
+    data,
+    erro: error as ErrorResponse,
+    isLoading: isMutating,
+  }
 }
