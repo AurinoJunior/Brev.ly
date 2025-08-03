@@ -17,8 +17,8 @@ export const useIncrementAccess = () => {
   )
 
   return {
-    createLink: trigger,
-    data,
+    incrementAccess: trigger,
+    isSuccess: !!data,
     error: error as ErrorResponse,
     isLoading: isMutating,
   }

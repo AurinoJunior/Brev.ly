@@ -14,6 +14,7 @@ export const Link = ({
   accessCount,
   handleDeleteLink,
 }: LinkProps) => {
+  const APP_URL = import.meta.env.VITE_FRONTEND_URL || "http://localhost:5173"
   const handleCopyShortLink = () => {
     navigator.clipboard.writeText(shortLink)
   }
@@ -24,9 +25,9 @@ export const Link = ({
         <RouterLink to={`/${shortLink}`} className="block">
           <h3
             className="text-md font-semibold text-blue-base truncate"
-            title={shortLink}
+            title={`${APP_URL}/${shortLink}`}
           >
-            {shortLink}
+            {`${APP_URL}/${shortLink}`}
           </h3>
         </RouterLink>
 

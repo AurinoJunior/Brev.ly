@@ -1,8 +1,9 @@
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { Link as RouterLink, useNavigate, useParams } from "react-router-dom"
 import Logo from "/images/logo.svg"
 import { InfoCard } from "../components/InfoCard/InfoCard"
 import { useGetOriginalLink } from "../hooks/useGetOriginalLink"
+import { useIncrementAccess } from "../hooks/useIncrementAccess"
 
 export const Redirect = () => {
   const { shortURL } = useParams()
@@ -11,17 +12,24 @@ export const Redirect = () => {
   const { data, error } = useGetOriginalLink({
     shortURL: shortURL || "",
   })
+  const { incrementAccess, isSuccess } = useIncrementAccess()
+  const hasIncremented = useRef(false)
 
   useEffect(() => {
-    if (data) {
-      window.location.href = data.originalURL
+    if (error) {
+      navigate("/not-found")
       return
     }
 
-    if (error) {
-      navigate("/not-found")
+    if (data && !hasIncremented.current) {
+      incrementAccess({ id: data.id })
+      hasIncremented.current = true
     }
-  }, [error, navigate, data])
+
+    if (isSuccess && data) {
+      window.location.href = data.originalURL
+    }
+  }, [incrementAccess, data, isSuccess, navigate, error])
 
   return (
     <InfoCard>
