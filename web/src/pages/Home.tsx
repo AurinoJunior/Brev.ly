@@ -1,8 +1,27 @@
+import { useEffect } from "react"
 import Logo from "/images/full-logo.svg"
 import { LinkList } from "../components/LinkList/LinkList"
 import { NewLinkForm } from "../components/NewLinkForm/NewLinkForm"
+import { useGetAllLinks } from "../hooks/useGetAllLinks"
+import { useToast } from "../hooks/useToast"
+import { useLinkStore } from "../store/useLinksStore"
 
 export const Home = () => {
+  const { links, error } = useGetAllLinks()
+  const { setLinks } = useLinkStore()
+  const { showToast } = useToast()
+
+  useEffect(() => {
+    if (error) {
+      showToast({ message: error.message, type: "error" })
+      return
+    }
+
+    if (links) {
+      setLinks(links)
+    }
+  }, [links])
+
   return (
     <section className="w-full lg:max-w-[980px]" id="home">
       <div className="w-[100px] mb-6 mx-auto lg:mr-auto lg:ml-0">

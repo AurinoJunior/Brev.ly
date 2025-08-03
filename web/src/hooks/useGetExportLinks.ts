@@ -15,7 +15,7 @@ export const useGetExportLinks = () => {
   return {
     exportLinks: trigger,
     data,
-    erro: error as ErrorResponse,
+    error: error as ErrorResponse,
     isLoading: isMutating,
   }
 }

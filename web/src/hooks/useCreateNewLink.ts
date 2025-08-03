@@ -1,4 +1,3 @@
-import { mutate } from "swr"
 import useSWRMutation from "swr/mutation"
 import type { ErrorResponse, NewLinkResponse } from "../@types/api"
 import { api } from "../service/api"
@@ -17,7 +16,6 @@ export const useCreateNewLink = () => {
         body: arg,
       })
 
-      mutate("get-all-links")
       return result
     }
   )

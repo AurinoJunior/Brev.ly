@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { Link as RouterLink } from "react-router-dom"
 import { useDeleteLink } from "../../hooks/useDeleteLink"
 import { useToast } from "../../hooks/useToast"
+import { useLinkStore } from "../../store/useLinksStore"
 import { Button } from "./Button"
 
 interface LinkProps {
@@ -11,6 +12,8 @@ interface LinkProps {
   id: string
 }
 
+const APP_URL = import.meta.env.VITE_FRONTEND_URL || "http://localhost:5173"
+
 export const Link = ({
   id,
   shortLink,
@@ -19,8 +22,8 @@ export const Link = ({
 }: LinkProps) => {
   const { showToast } = useToast()
   const { deleteLink, isSuccess: isDeleted } = useDeleteLink()
+  const { removeLink } = useLinkStore()
 
-  const APP_URL = import.meta.env.VITE_FRONTEND_URL || "http://localhost:5173"
   const handleCopyShortLink = () => {
     showToast({
       message: "URL copiada!",
@@ -31,6 +34,7 @@ export const Link = ({
 
   useEffect(() => {
     if (isDeleted) {
+      removeLink(id)
       showToast({ message: "Link deletado com sucesso!", type: "info" })
       return
     }

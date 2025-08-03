@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { type SubmitHandler, useForm } from "react-hook-form"
 import { useCreateNewLink } from "../../hooks/useCreateNewLink"
 import { useToast } from "../../hooks/useToast"
+import { useLinkStore } from "../../store/useLinksStore"
 import { Button } from "../ui/Button"
 import { Input } from "../ui/Input"
 
@@ -16,10 +17,20 @@ export const NewLinkForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>()
-  const { createLink, error, isLoading } = useCreateNewLink()
+  const { createLink, error, isLoading, data } = useCreateNewLink()
   const { showToast } = useToast()
+  const { addLink, links } = useLinkStore()
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
+    if (
+      links.some(existingLink => existingLink.originalURL === data.originalLink)
+    ) {
+      return showToast({
+        message: "Ops, Link já existe!",
+        type: "error",
+      })
+    }
+
     createLink({
       url: data.originalLink,
       shortURL: data.shortLink,
@@ -27,13 +38,19 @@ export const NewLinkForm = () => {
   }
 
   useEffect(() => {
-    if (!error) return
+    if (error) {
+      showToast({
+        message: error.message,
+        type: "error",
+      })
+      return
+    }
 
-    showToast({
-      message: error.message,
-      type: "error",
-    })
-  }, [error])
+    if (data) {
+      addLink(data)
+      return
+    }
+  }, [error, data])
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

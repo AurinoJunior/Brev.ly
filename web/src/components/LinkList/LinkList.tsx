@@ -1,15 +1,15 @@
 import { useEffect } from "react"
-import { useGetAllLinks } from "../../hooks/useGetAllLinks"
 import { useGetExportLinks } from "../../hooks/useGetExportLinks"
 import { useToast } from "../../hooks/useToast"
+import { useLinkStore } from "../../store/useLinksStore"
 import { Button } from "../ui/Button"
 import { Link } from "../ui/Link"
 import { EmptyState } from "./EmptyState"
 
 export const LinkList = () => {
-  const { links, error } = useGetAllLinks()
-  const { exportLinks, data, isLoading } = useGetExportLinks()
+  const { exportLinks, data, isLoading, error } = useGetExportLinks()
   const { showToast } = useToast()
+  const { links } = useLinkStore()
 
   const emptyState = links?.length === 0 || !!error
   const isDisabledDowloadButton = isLoading || emptyState
@@ -46,16 +46,15 @@ export const LinkList = () => {
 
       {emptyState && <EmptyState />}
 
-      {!error &&
-        links?.map(link => (
-          <Link
-            key={link.id}
-            id={link.id}
-            shortLink={link.shortURL}
-            accessCount={link.visits ?? 0}
-            originalLink={link.originalURL}
-          />
-        ))}
+      {links?.map(link => (
+        <Link
+          key={link.id}
+          id={link.id}
+          shortLink={link.shortURL}
+          accessCount={link.visits ?? 0}
+          originalLink={link.originalURL}
+        />
+      ))}
     </div>
   )
 }

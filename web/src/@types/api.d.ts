@@ -23,3 +23,7 @@ export interface IncrementAccessResponse {
 export interface ExportLinksResponse {
   csvRemoteURL: string
 }
+
+export interface DeleteLinkResponse {
+  message: string
+}
