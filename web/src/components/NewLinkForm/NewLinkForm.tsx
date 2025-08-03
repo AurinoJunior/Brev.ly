@@ -20,7 +20,7 @@ export const NewLinkForm = () => {
   const onSubmit: SubmitHandler<IFormInput> = data => {
     createLink({
       url: data.originalLink,
-      shortURL: `${import.meta.env.VITE_FRONTEND_URL}/${data.shortLink}`,
+      shortURL: data.shortLink,
     })
 
     console.info(data)

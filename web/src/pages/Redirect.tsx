@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link as RouterLink } from "react-router-dom"
 import Logo from "/images/logo.svg"
 import { InfoCard } from "../components/InfoCard/InfoCard"
 
@@ -14,9 +14,9 @@ export const Redirect = () => {
         <p>O link será aberto automaticamente em alguns instantes.</p>
         <p>
           Não foi redirecionado?{" "}
-          <Link to="/" className="text-blue-base hover:underline">
+          <RouterLink to="/" className="text-blue-base hover:underline">
             Acesse aqui
-          </Link>
+          </RouterLink>
         </p>
       </div>
     </InfoCard>

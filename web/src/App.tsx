@@ -10,8 +10,8 @@ export const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/redirecionando" element={<Redirect />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<Redirect />} />
+          <Route path="/not-found" element={<NotFound />} />
         </Routes>
       </Router>
     </main>

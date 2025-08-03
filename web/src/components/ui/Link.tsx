@@ -1,3 +1,4 @@
+import { Link as RouterLink } from "react-router-dom"
 import { Button } from "./Button"
 
 interface LinkProps {
@@ -20,12 +21,15 @@ export const Link = ({
   return (
     <div className="flex items-center justify-between py-4 gap-4 border-b border-gray-200 last:border-b-0">
       <div className="max-w-[157px]">
-        <h3
-          className="text-md font-semibold text-blue-base truncate"
-          title={shortLink}
-        >
-          {shortLink}
-        </h3>
+        <RouterLink to={`/${shortLink}`} className="block">
+          <h3
+            className="text-md font-semibold text-blue-base truncate"
+            title={shortLink}
+          >
+            {shortLink}
+          </h3>
+        </RouterLink>
+
         <p className="text-sm text-gray-500 truncate" title={originalLink}>
           {originalLink}
         </p>
