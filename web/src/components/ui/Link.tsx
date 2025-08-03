@@ -1,4 +1,6 @@
+import { useEffect } from "react"
 import { Link as RouterLink } from "react-router-dom"
+import { useDeleteLink } from "../../hooks/useDeleteLink"
 import { useToast } from "../../hooks/useToast"
 import { Button } from "./Button"
 
@@ -6,16 +8,18 @@ interface LinkProps {
   shortLink: string
   originalLink: string
   accessCount: number
-  handleDeleteLink: () => void
+  id: string
 }
 
 export const Link = ({
+  id,
   shortLink,
   originalLink,
   accessCount,
-  handleDeleteLink,
 }: LinkProps) => {
   const { showToast } = useToast()
+  const { deleteLink, isSuccess: isDeleted } = useDeleteLink()
+
   const APP_URL = import.meta.env.VITE_FRONTEND_URL || "http://localhost:5173"
   const handleCopyShortLink = () => {
     showToast({
@@ -24,6 +28,13 @@ export const Link = ({
     })
     navigator.clipboard.writeText(shortLink)
   }
+
+  useEffect(() => {
+    if (isDeleted) {
+      showToast({ message: "Link deletado com sucesso!", type: "info" })
+      return
+    }
+  }, [isDeleted])
 
   return (
     <div className="flex items-center justify-between py-4 gap-4 border-b border-gray-200 last:border-b-0">
@@ -45,7 +56,11 @@ export const Link = ({
       <div className="flex items-center gap-1">
         <p className="text-sm text-gray-500 mr-4">{accessCount} acessos</p>
         <Button variant="icon" icon="copy" onClick={handleCopyShortLink} />
-        <Button variant="icon" icon="trash" onClick={handleDeleteLink} />
+        <Button
+          variant="icon"
+          icon="trash"
+          onClick={() => deleteLink({ id })}
+        />
       </div>
     </div>
   )

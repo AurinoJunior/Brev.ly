@@ -1,5 +1,4 @@
 import { useEffect } from "react"
-import { useDeleteLink } from "../../hooks/useDeleteLink"
 import { useGetAllLinks } from "../../hooks/useGetAllLinks"
 import { useGetExportLinks } from "../../hooks/useGetExportLinks"
 import { useToast } from "../../hooks/useToast"
@@ -9,7 +8,6 @@ import { EmptyState } from "./EmptyState"
 
 export const LinkList = () => {
   const { links, error } = useGetAllLinks()
-  const { deleteLink, isSuccess: isDeleted } = useDeleteLink()
   const { exportLinks, data, isLoading } = useGetExportLinks()
   const { showToast } = useToast()
 
@@ -32,13 +30,6 @@ export const LinkList = () => {
     }
   }, [data, error])
 
-  useEffect(() => {
-    if (isDeleted) {
-      showToast({ message: "Link deletado com sucesso!", type: "info" })
-      return
-    }
-  }, [isDeleted])
-
   return (
     <div className="w-full max-w-[380px] h-fit bg-white p-6 rounded-lg lg:max-w-[580px]">
       <div className="flex items-center justify-between py-4 border-b border-gray-200">
@@ -59,10 +50,10 @@ export const LinkList = () => {
         links?.map(link => (
           <Link
             key={link.id}
+            id={link.id}
             shortLink={link.shortURL}
             accessCount={link.visits ?? 0}
             originalLink={link.originalURL}
-            handleDeleteLink={() => deleteLink({ id: link.id })}
           />
         ))}
     </div>
