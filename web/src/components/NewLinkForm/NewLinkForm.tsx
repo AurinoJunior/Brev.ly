@@ -60,7 +60,7 @@ export const NewLinkForm = () => {
         placeholder="www.example.com"
         errorMessage={errors.originalLink?.message}
         {...register("originalLink", {
-          required: "Link original é obrigatório",
+          required: "Informe uma url válida.",
         })}
       />
 
@@ -68,7 +68,23 @@ export const NewLinkForm = () => {
         label="Link encurtado"
         placeholder="Link encurtado"
         errorMessage={errors.shortLink?.message}
-        {...register("shortLink", { required: "Link encurtado é obrigatório" })}
+        {...register("shortLink", {
+          required:
+            "Informe uma url minúscula e sem espaços/caracteres especiais.",
+          validate: value => {
+            const regex = /^[a-z0-9\-]+$/
+            if (value !== value.toLowerCase()) {
+              return "A url deve ser minúscula."
+            }
+            if (/\s/.test(value)) {
+              return "A url não pode conter espaços."
+            }
+            if (!regex.test(value)) {
+              return "A url não pode conter caracteres especiais."
+            }
+            return true
+          },
+        })}
       />
 
       <Button

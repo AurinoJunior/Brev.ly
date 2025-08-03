@@ -42,8 +42,8 @@ export const Link = ({
 
   return (
     <div className="flex items-center justify-between py-4 gap-4 border-b border-gray-200 last:border-b-0">
-      <div className="max-w-[157px]">
-        <RouterLink to={`/${shortLink}`} className="block">
+      <div className="max-w-[157px] lg:max-w-fit truncate">
+        <RouterLink to={`/${shortLink}`} target="_blank" className="block">
           <h3
             className="text-md font-semibold text-blue-base truncate"
             title={`${APP_URL}/${shortLink}`}
@@ -58,7 +58,9 @@ export const Link = ({
       </div>
 
       <div className="flex items-center gap-1">
-        <p className="text-sm text-gray-500 mr-4">{accessCount} acessos</p>
+        <p className="text-sm text-gray-500 mr-4 text-nowrap">
+          {accessCount} acessos
+        </p>
         <Button variant="icon" icon="copy" onClick={handleCopyShortLink} />
         <Button
           variant="icon"
