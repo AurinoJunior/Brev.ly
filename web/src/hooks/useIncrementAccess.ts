@@ -10,14 +10,16 @@ export const useIncrementAccess = () => {
   const { trigger, data, error, isMutating } = useSWRMutation(
     "increment-access",
     (_, { arg }: { arg: IncrementAccessPayload }) =>
-      api<ErrorResponse | IncrementAccessResponse, IncrementAccessPayload>(
-        "/increment",
-        {
-          method: "POST",
-          body: arg,
-        }
-      )
+      api<IncrementAccessResponse, IncrementAccessPayload>("/increment", {
+        method: "POST",
+        body: arg,
+      })
   )
 
-  return { createLink: trigger, data, error, isLoading: isMutating }
+  return {
+    createLink: trigger,
+    data,
+    error: error as ErrorResponse,
+    isLoading: isMutating,
+  }
 }

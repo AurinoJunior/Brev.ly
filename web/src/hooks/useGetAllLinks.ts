@@ -9,7 +9,7 @@ export const useGetAllLinks = () => {
 
   return {
     links: data,
-    error: error as ErrorResponse | undefined,
+    error: error as ErrorResponse,
     isLoading,
   }
 }

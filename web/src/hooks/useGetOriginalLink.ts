@@ -4,12 +4,12 @@ import { api } from "../service/api"
 
 export const useGetOriginalLink = () => {
   const { data, error, isLoading } = useSWR("original-links", () =>
-    api<LinkResponse[] | ErrorResponse>("/original-links")
+    api<LinkResponse>("/original-links")
   )
 
   return {
     links: data,
-    error,
+    error: error as ErrorResponse,
     isLoading,
   }
 }

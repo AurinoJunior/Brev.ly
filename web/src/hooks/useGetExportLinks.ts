@@ -4,7 +4,7 @@ import { api } from "../service/api"
 
 export const useGetExportLinks = () => {
   const { trigger, data, error, isMutating } = useSWRMutation(
-    "links-export",
+    "export-links",
     () =>
       api<ExportLinksResponse>("/links/export", {
         method: "POST",
