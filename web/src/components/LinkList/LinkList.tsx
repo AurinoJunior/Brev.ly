@@ -2,19 +2,26 @@ import { useEffect } from "react"
 import { useDeleteLink } from "../../hooks/useDeleteLink"
 import { useGetAllLinks } from "../../hooks/useGetAllLinks"
 import { useGetExportLinks } from "../../hooks/useGetExportLinks"
+import { useToast } from "../../hooks/useToast"
 import { Button } from "../ui/Button"
 import { Link } from "../ui/Link"
 import { EmptyState } from "./EmptyState"
 
 export const LinkList = () => {
   const { links, error } = useGetAllLinks()
-  const { deleteLink } = useDeleteLink()
+  const { deleteLink, isSuccess: isDeleted } = useDeleteLink()
   const { exportLinks, data, isLoading } = useGetExportLinks()
+  const { showToast } = useToast()
 
   const emptyState = links?.length === 0 || !!error
   const isDisabledDowloadButton = isLoading || emptyState
 
   useEffect(() => {
+    if (error) {
+      showToast({ message: error.message, type: "error" })
+      return
+    }
+
     if (data?.csvRemoteURL) {
       const link = document.createElement("a")
       link.href = data.csvRemoteURL
@@ -23,7 +30,14 @@ export const LinkList = () => {
       link.click()
       document.body.removeChild(link)
     }
-  }, [data])
+  }, [data, error])
+
+  useEffect(() => {
+    if (isDeleted) {
+      showToast({ message: "Link deletado com sucesso!", type: "info" })
+      return
+    }
+  }, [isDeleted])
 
   return (
     <div className="w-full max-w-[380px] h-fit bg-white p-6 rounded-lg lg:max-w-[580px]">

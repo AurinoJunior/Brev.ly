@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { type SubmitHandler, useForm } from "react-hook-form"
 import { useCreateNewLink } from "../../hooks/useCreateNewLink"
+import { useToast } from "../../hooks/useToast"
 import { Button } from "../ui/Button"
 import { Input } from "../ui/Input"
 
@@ -15,21 +16,23 @@ export const NewLinkForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>()
-  const { createLink, error } = useCreateNewLink()
+  const { createLink, error, isLoading } = useCreateNewLink()
+  const { showToast } = useToast()
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
     createLink({
       url: data.originalLink,
       shortURL: data.shortLink,
     })
-
-    console.info(data)
   }
 
   useEffect(() => {
-    if (error) {
-      console.error(error.message)
-    }
+    if (!error) return
+
+    showToast({
+      message: error.message,
+      type: "error",
+    })
   }, [error])
 
   return (
@@ -51,7 +54,12 @@ export const NewLinkForm = () => {
         {...register("shortLink", { required: "Link encurtado é obrigatório" })}
       />
 
-      <Button className="mt-6" variant="primary" type="submit">
+      <Button
+        className="mt-6"
+        variant="primary"
+        type="submit"
+        disabled={isLoading}
+      >
         Salvar link
       </Button>
     </form>

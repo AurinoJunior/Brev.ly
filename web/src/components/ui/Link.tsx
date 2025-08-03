@@ -1,4 +1,5 @@
 import { Link as RouterLink } from "react-router-dom"
+import { useToast } from "../../hooks/useToast"
 import { Button } from "./Button"
 
 interface LinkProps {
@@ -14,8 +15,13 @@ export const Link = ({
   accessCount,
   handleDeleteLink,
 }: LinkProps) => {
+  const { showToast } = useToast()
   const APP_URL = import.meta.env.VITE_FRONTEND_URL || "http://localhost:5173"
   const handleCopyShortLink = () => {
+    showToast({
+      message: "URL copiada!",
+      type: "info",
+    })
     navigator.clipboard.writeText(shortLink)
   }
 

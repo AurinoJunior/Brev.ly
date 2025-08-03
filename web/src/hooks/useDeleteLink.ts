@@ -20,5 +20,10 @@ export const useDeleteLink = () => {
     }
   )
 
-  return { deleteLink: trigger, data, error, isLoading: isMutating }
+  return {
+    deleteLink: trigger,
+    isSuccess: !!data,
+    error,
+    isLoading: isMutating,
+  }
 }

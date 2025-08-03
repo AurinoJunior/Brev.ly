@@ -1,5 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
 
+import { ToastContainer } from "react-toastify"
 import { Home } from "./pages/Home"
 import { NotFound } from "./pages/NotFound"
 import { Redirect } from "./pages/Redirect"
@@ -14,6 +15,7 @@ export const App = () => {
           <Route path="/not-found" element={<NotFound />} />
         </Routes>
       </Router>
+      <ToastContainer />
     </main>
   )
 }
