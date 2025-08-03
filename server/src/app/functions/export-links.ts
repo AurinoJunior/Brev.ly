@@ -12,6 +12,7 @@ export async function exportLinks() {
       url: links.url,
       shortURL: links.shortURL,
       createdAt: links.createdAt,
+      visits: links.visits
     })
     .from(links)
     .toSQL()
@@ -26,6 +27,7 @@ export async function exportLinks() {
       { key: "url", header: "URL original" },
       { key: "short_url", header: "URL encurtada" },
       { key: "created_at", header: "Data de criação" },
+      { key: "visits", header: "Acessos" },
     ],
   })
 
