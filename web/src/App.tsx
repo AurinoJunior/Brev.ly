@@ -10,7 +10,7 @@ export const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="*" element={<Redirect />} />
+          <Route path="/:shortURL" element={<Redirect />} />
           <Route path="/not-found" element={<NotFound />} />
         </Routes>
       </Router>

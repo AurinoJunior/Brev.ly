@@ -4,7 +4,7 @@ import { api } from "../service/api"
 
 export const useGetOriginalLink = ({ shortURL }: { shortURL: string }) => {
   const { data, error, isLoading } = useSWR("original-link", () =>
-    api<LinkResponse>(`/original-link/${shortURL}`, {
+    api<LinkResponse>("/original-link", {
       queryParams: { shortURL },
     })
   )
