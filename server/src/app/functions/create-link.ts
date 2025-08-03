@@ -7,7 +7,7 @@ export async function createLink({
   shortURL,
 }: { url: string; shortURL: string }) {
   const existingLink = await db.query.links.findFirst({
-    where: (links, { eq }) => eq(links.url, url),
+    where: (links, { eq }) => eq(links.shortURL, shortURL),
   })
 
   if (existingLink) {
