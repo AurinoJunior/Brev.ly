@@ -1,5 +1,7 @@
+import { useEffect } from "react"
 import { useDeleteLink } from "../../hooks/useDeleteLink"
 import { useGetAllLinks } from "../../hooks/useGetAllLinks"
+import { useGetExportLinks } from "../../hooks/useGetExportLinks"
 import { Button } from "../ui/Button"
 import { Link } from "../ui/Link"
 import { EmptyState } from "./EmptyState"
@@ -7,13 +9,32 @@ import { EmptyState } from "./EmptyState"
 export const LinkList = () => {
   const { links, error } = useGetAllLinks()
   const { deleteLink } = useDeleteLink()
+  const { exportLinks, data, isLoading } = useGetExportLinks()
 
-  const emptyState = links?.length === 0 || error
+  const emptyState = links?.length === 0 || !!error
+  const isDisabledDowloadButton = isLoading || emptyState
+
+  useEffect(() => {
+    if (data?.csvRemoteURL) {
+      const link = document.createElement("a")
+      link.href = data.csvRemoteURL
+      link.download = "links.csv"
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    }
+  }, [data])
+
   return (
     <div className="w-full max-w-[380px] h-fit bg-white p-6 rounded-lg lg:max-w-[580px]">
       <div className="flex items-center justify-between py-4 border-b border-gray-200">
         <h2 className="text-lg font-bold">Meus links</h2>
-        <Button variant="iconButton" icon="download">
+        <Button
+          variant="iconButton"
+          icon="download"
+          onClick={() => exportLinks()}
+          disabled={isDisabledDowloadButton}
+        >
           Baixar CSV
         </Button>
       </div>

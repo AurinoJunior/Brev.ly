@@ -1,15 +1,16 @@
-import useSWR from "swr"
-import type { ErrorResponse, ExportLinksResponse } from "../@types/api"
+import useSWRMutation from "swr/mutation"
+import type { ExportLinksResponse } from "../@types/api"
 import { api } from "../service/api"
 
 export const useGetExportLinks = () => {
-  const { data, error, isLoading } = useSWR("export-links", () =>
-    api<ExportLinksResponse[] | ErrorResponse>("/links/export")
+  const { trigger, data, error, isMutating } = useSWRMutation(
+    "links-export",
+    () =>
+      api<ExportLinksResponse>("/links/export", {
+        method: "POST",
+        body: JSON.stringify({}),
+      })
   )
 
-  return {
-    links: data,
-    error,
-    isLoading,
-  }
+  return { exportLinks: trigger, data, error, isLoading: isMutating }
 }
