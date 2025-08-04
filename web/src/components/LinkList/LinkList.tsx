@@ -5,8 +5,13 @@ import { useLinkStore } from "../../store/useLinksStore"
 import { Button } from "../ui/Button"
 import { Link } from "../ui/Link"
 import { EmptyState } from "./EmptyState"
+import { LoadingState } from "./LoadingState"
 
-export const LinkList = () => {
+interface LinkListProps {
+  isLinksLoading?: boolean
+}
+
+export const LinkList = ({ isLinksLoading }: LinkListProps) => {
   const { exportLinks, data, isLoading, error } = useGetExportLinks()
   const { showToast } = useToast()
   const { links } = useLinkStore()
@@ -31,7 +36,7 @@ export const LinkList = () => {
   }, [data, error])
 
   return (
-    <div className="w-full h-fit bg-white p-6 rounded-lg lg:max-w-[580px]">
+    <div className="w-full h-fit bg-white p-6 rounded-lg max-h-[300px] overflow-y-auto lg:max-w-[580px] lg:max-h-[600px]">
       <div className="flex items-center justify-between py-4 border-b border-gray-200">
         <h2 className="text-lg font-bold">Meus links</h2>
         <Button
@@ -45,7 +50,8 @@ export const LinkList = () => {
         </Button>
       </div>
 
-      {emptyState && <EmptyState />}
+      {isLinksLoading && <LoadingState />}
+      {emptyState && !isLinksLoading && <EmptyState />}
 
       {links?.map(link => (
         <Link

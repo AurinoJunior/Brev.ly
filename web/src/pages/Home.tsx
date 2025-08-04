@@ -7,7 +7,7 @@ import { useToast } from "../hooks/useToast"
 import { useLinkStore } from "../store/useLinksStore"
 
 export const Home = () => {
-  const { links, error } = useGetAllLinks()
+  const { links, error, isLoading } = useGetAllLinks()
   const { setLinks } = useLinkStore()
   const { showToast } = useToast()
 
@@ -34,7 +34,7 @@ export const Home = () => {
           <NewLinkForm />
         </div>
 
-        <LinkList />
+        <LinkList isLinksLoading={isLoading} />
       </div>
     </section>
   )

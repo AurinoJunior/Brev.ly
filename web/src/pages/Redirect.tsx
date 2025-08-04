@@ -17,7 +17,7 @@ export const Redirect = () => {
 
   useEffect(() => {
     if (error) {
-      navigate("/not-found")
+      navigate("/url/not-found")
       return
     }
 
