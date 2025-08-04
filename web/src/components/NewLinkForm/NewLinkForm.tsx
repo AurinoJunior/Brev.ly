@@ -64,7 +64,7 @@ export const NewLinkForm = () => {
 
       <Input
         label="Link encurtado"
-        placeholder="Link encurtado"
+        placeholder="exemplo"
         errorMessage={errors.shortLink?.message}
         {...register("shortLink", {
           required:

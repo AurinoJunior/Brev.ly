@@ -35,8 +35,8 @@ Brev.ly é uma aplicação para encurtamento de URLs que permite cadastrar, list
 
 1. clone o projeto.
 2. Instale as dependencias com `yarn` lembrando que para esse projeto é utilizado `node >= 22.14.0`.
-3. Clone o .env.example para .env
-4. Utilize o comando `yarn start` se tudo ocorrer bem a aplicação estará acessivel em `https://localhost:5173`
+3. Clone o `.env.example` para `.env`
+4. Utilize o comando `yarn dev` se tudo ocorrer bem a aplicação estará acessivel em `https://localhost:5173`
 
 
 ## :page_with_curl: Funcionalidades e Regras
