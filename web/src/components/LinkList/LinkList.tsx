@@ -31,12 +31,13 @@ export const LinkList = () => {
   }, [data, error])
 
   return (
-    <div className="w-full max-w-[380px] h-fit bg-white p-6 rounded-lg lg:max-w-[580px]">
+    <div className="w-full h-fit bg-white p-6 rounded-lg lg:max-w-[580px]">
       <div className="flex items-center justify-between py-4 border-b border-gray-200">
         <h2 className="text-lg font-bold">Meus links</h2>
         <Button
-          variant="iconButton"
+          className="w-[104px]"
           icon="download"
+          isLoading={isLoading}
           onClick={() => exportLinks()}
           disabled={isDisabledDowloadButton}
         >

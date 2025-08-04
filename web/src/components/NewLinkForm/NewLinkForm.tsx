@@ -22,9 +22,7 @@ export const NewLinkForm = () => {
   const { addLink, links } = useLinkStore()
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
-    if (
-      links.some(existingLink => existingLink.originalURL === data.originalLink)
-    ) {
+    if (links.some(existingLink => existingLink.shortURL === data.shortLink)) {
       return showToast({
         message: "Ops, Link já existe!",
         type: "error",
@@ -91,6 +89,7 @@ export const NewLinkForm = () => {
         className="mt-6"
         variant="primary"
         type="submit"
+        isLoading={isLoading}
         disabled={isLoading}
       >
         Salvar link

@@ -10,7 +10,6 @@ const buttonVariants = tv({
       primary:
         "w-full h-[48px] font-semibold text-[14px] text-white rounded-lg bg-blue-base hover:bg-blue-dark",
       icon: "w-[32px]",
-      iconButton: "w-fit",
     },
   },
 })
@@ -19,6 +18,7 @@ export type TButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof buttonVariants> & {
     icon?: TIconName
     children?: React.ReactNode
+    isLoading?: boolean
   }
 
 export const Button = ({
@@ -26,6 +26,7 @@ export const Button = ({
   children,
   icon,
   variant,
+  isLoading,
   ...props
 }: TButtonProps) => {
   return (
@@ -33,8 +34,11 @@ export const Button = ({
       className={buttonVariants({ variant, className })}
       {...props}
     >
-      {icon && <Icon name={icon} size={18} color="black" />}
-      {children && <>{children}</>}
+      {icon && !isLoading && <Icon name={icon} size={18} color="black" />}
+      {isLoading && (
+        <div className="w-4 h-4 border-2 border-t-transparent border-white border-solid rounded-full animate-spin" />
+      )}
+      {children && !isLoading && <>{children}</>}
     </HeadlessButton>
   )
 }
